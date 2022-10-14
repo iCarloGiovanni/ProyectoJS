@@ -1,33 +1,111 @@
-//Mi inventario
-let num_playeras = 3;
-let num_sudaderas = 2;
-let num_sueteres = 0;
-let num_tazas = 1;
+//Mi inventario (numero de playeras, sudaderas, sueteres, tazas)
+let inventario = [3, 2, 0, 1];
+console.log("Aun disponibles:\n",
+            inventario[0] + " playeras",
+            inventario[1] + " sudaderas",
+            inventario[2] + " sueteres",
+            inventario[3] + " tazas")
+
+//Mi Carrito
+let id_prod = 1;
+let carrito = new Array();
+let tipo_producto = "";
+let precio_prod = 0;
+let precioTotal = 0;
 let esPrenda = true;
 
-//Precios
-const precioPlayera = 200;
-const precioSudadera = 400;
-const precioSueter = 300;
-const precioTaza = 100;
-let precioTotal = 0;
+//Tipos de productos (Arreglos)
+tallas_disponibles = ["S", "M", "L", "XL"];
+colores_disponibes = ["blanco", "negro", "azul", "rojo"];
+precios_disponibles = [200, 400, 300, 100]
+productos_disponibles = ["playera", "sudadera", "sueter", "taza"]
 
 //Funcion para realizar un pedido nuevo
 function nuevoPedido(){
     let codigo = prompt("Ingresa el codigo del producto");
-    let talla = "-";
-    let color = "-";
-    let diseno = "-";
     esPrenda = true;
     return codigo;
 }
 
-function agregarDetalles(){
-    if(esPrenda){
-        talla = prompt("Ingresa la talla (S, M, L, XL)");
+function agregar_producto(id, price){
+
+    let producto = agregarDetalles(esPrenda);
+
+    if(producto){
+
+        producto.set_id(id_prod);
+        producto.set_precio(price)
+        id_prod++;
+
+        carrito.push(producto);
+        console.log(carrito);
+
+        precioTotal += producto.precio;
+        inventario[id-1] --;
+        
+        console.table(carrito);
+        console.log("Aun disponibles:\n",
+                    inventario[0] + " playeras",
+                    inventario[1] + " sudaderas",
+                    inventario[2] + " sueteres",
+                    inventario[3] + " tazas")
+        
+
+        if(producto.esPrenda){
+            alert("Has agregado 1 " + producto.tipo + " talla " + producto.talla + ", color " + producto.color + ", con diseno: " + producto.diseno
+            + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
+        }else{
+            alert("Has agregado 1 " + producto.tipo + ", color " + producto.color + ", con diseno: " + producto.diseno
+            + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
+        }
+
     }
-    color = prompt("Ingresa el color");
-    diseno = prompt("Ingresa el nombre del diseno");
+}
+
+function agregarDetalles(prenda){
+
+    let check = true;
+
+    while(check){
+
+        let msj = "";
+
+        tipo = tipo_producto;
+
+        if(prenda){
+            talla = (prompt("Ingresa la talla (S, M, L, XL)").trim()).toUpperCase();
+        }else{
+            talla = "-";
+        }
+
+        color = (prompt("Ingresa el color (blanco, negro, azul, rojo)").trim()).toLowerCase();
+        diseno = prompt("Ingresa el nombre del diseno").trim();
+
+        if(prenda){
+            if(!(tallas_disponibles.includes(talla))){
+                msj += "\nIngresa una talla correcta";
+            }
+        }
+
+        if(!(colores_disponibes.includes(color))){
+            msj += "\nIngresa un color valido";
+        }
+
+        if(!diseno){
+            msj += "\nIngresa un diseno";
+        }
+
+        if(msj!= ""){
+
+            alert(msj);
+            check = confirm("Quieres volver a intentarlo?");
+            
+        }else{
+            return new producto (tipo, color, talla, diseno);
+        }
+    }
+
+    return false;
 }
 
 let retry = false;
@@ -35,62 +113,48 @@ let retry = false;
 window.onload = function(){ 
     setTimeout(()=>{
         do{
+
             let num_pedido = nuevoPedido();
         
             switch(num_pedido){
         
                 case "1" : 
-                    if(num_playeras > 0){
-                        agregarDetalles();
-                        precioTotal += precioPlayera;
-                        num_playeras--;
-                        console.log(num_playeras + " playeras restantes");
-                        alert("has agregado 1 playera talla " + talla + ", color " + color + ", con diseno: " + diseno
-                        + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
-        
+                    tipo_producto = productos_disponibles[0];  
+                    precio_prod = precios_disponibles[0]; 
+                    if(inventario[num_pedido-1] > 0){
+                        agregar_producto(num_pedido, precio_prod);
                     }else{
                         alert("No hay playeras disponibles!")
                     }
                 break;
         
                 case "2" :
-                    if(num_sudaderas > 0){
-                        agregarDetalles();
-                        precioTotal += precioSudadera;
-                        num_sudaderas--;
-                        console.log(num_sudaderas + " sudaderas restantes");
-                        alert("has agregado 1 sudadera talla " + talla + ", color " + color + ", con diseno: " + diseno
-                        + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
-        
+                    tipo_producto = productos_disponibles[1];
+                    precio_prod = precios_disponibles[1];
+                    if(inventario[num_pedido-1] > 0){
+                        agregar_producto(num_pedido, precio_prod);
                     }else{
                         alert("No hay sudaderas disponibles!")
                     }
                 break;
         
                 case "3" :
-                    if(num_sueteres > 0){
-                        agregarDetalles();
-                        precioTotal += precioSueter;
-                        num_sueteres--;
-                        console.log(num_sueteres + " sueteres restantes");
-                        alert("has agregado 1 sueter talla " + talla + ", color " + color + ", con diseno: " + diseno
-                        + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
-        
+                    tipo_producto = productos_disponibles[2];
+                    precio_prod = precios_disponibles[2];
+                    tipo_producto = "sueter";
+                    if(inventario[num_pedido-1] > 0){
+                        agregar_producto(num_pedido, precio_prod);
                     }else{
                         alert("No hay sueteres disponibles!")
                     }
                 break;
         
                 case "4" :
-                    if(num_tazas > 0){
+                    tipo_producto = productos_disponibles[3];
+                    precio_prod = precios_disponibles[3];
+                    if(inventario[num_pedido-1] > 0){
                         esPrenda = false;
-                        agregarDetalles();
-                        precioTotal += precioTaza;
-                        num_tazas--;
-                        console.log(num_tazas + " tazas restantes");
-                        alert("has agregado 1 taza color " + color + ", con diseno: " + diseno
-                        + "\nEl total de tu compra hasta ahora es de: $" + precioTotal + "MXN");
-        
+                        agregar_producto(num_pedido, precio_prod);
                     }else{
                         alert("No hay tazas disponibles!")
                     }
