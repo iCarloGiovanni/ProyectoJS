@@ -3,40 +3,226 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    /* font-family: 'Amatic SC', cursive; */
     font-family: 'Francois One', sans-serif;
+}
+
+body{
+    background-image: linear-gradient(rgb(137, 123, 222), rgb(197, 233, 245));
+    width: 100%;
 }
 
 h1{
     text-align: center;
-    font-size: 36px;
-    margin-top: 200px;
+    font-size: 3rem;
     margin-bottom: 20px;
+    color: rgb(71, 50, 120);
+}
+
+h2{
+    font-size: 2rem;
+    
+}
+
+h3{
+    font-size: 1.8rem;
+}
+
+h4{
+    font-size: 1.2rem;
 }
 
 p{
     text-align: center;
+    font-size: 1.5rem;
 }
 
 .productos{
-    display: flex;
     text-align: center;
-    justify-content: space-around;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto;
+    grid-template-areas:"playera sudadera sueter taza";
+    margin-top: 60px;
 }
 
-.prod{
-    margin: 20px;
+.productos img{
+    width: 80%;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-img{
-    height: 300px;
-    width: 300px;
+.playera{
+    grid-area: playera;
+}
+
+.sudadera{
+    grid-area: sudadera;
+
+}
+
+.sueter{
+    grid-area: sueter;
+}
+
+.taza{
+    grid-area: taza;
+}
+
+figure img{
+    border-radius: 1rem;
 }
 
 footer{
     display: flex;
     justify-content: space-around;
-    position: absolute;
+    position: fixed;
+    width: 100%;
     bottom: 0;
-    width: 100%;;
-    margin-bottom: 20px;
+    left: 0;
+    height: 40px;
+    z-index: -1;
+}
+
+header i{
+    color: white;
+    font-size: 2rem;
+}
+
+.badge:after{
+    content:attr(value);
+    font-size: 1.2rem;
+    color: #fff;
+    background: rgb(87, 51, 203);
+    border-radius:50%;
+    padding: 0 5px;
+    position:relative;
+    left:-10px;
+    opacity:0.9;
+}
+
+header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between ;
+    padding: 1rem;
+    font-size: 3rem;
+    color: white;
+}
+
+header img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+section{
+    margin-top: 40px;
+}
+
+.carritoTotal{
+    background-color: white;
+    border-radius: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 60%;
+    margin-left: 20%;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
+
+#carritoContent{
+    justify-content: center;
+}
+
+.bloqueProducto{
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: auto;
+    grid-template-areas:"img nombre precio"
+                        "img detalles boton";
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 60%;
+    margin-left: 20%;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.btn-quitar{
+    grid-area: boton;
+    padding: 10px;
+    justify-self: right;
+    width: 2.5rem;
+    font-size: 1rem;
+}
+
+.imgProd{
+    grid-area: img;
+    width: 120px;
+    height: 120px;
+    justify-self: center;
+    border-radius: 1rem;
+}
+
+.nombreProd{
+    grid-area: nombre;
+    color: rgb(72, 52, 125);
+    text-align: left;
+}
+
+.precioProd{
+    grid-area: precio;
+    text-align: right;
+}
+
+.detallesProd{
+    grid-area: detalles;
+    text-align: left;
+}
+
+.title-carrito{
+    margin-top: 20px;
+}
+
+.caracteristicas{
+    justify-content:space-between ;
+    display: flex;
+    flex-direction: row;
+    width: 60%;
+    margin-top: 1rem;
+    margin-left: 20%;
+    text-align: center;
+    font-size: 1.8rem;
+}
+
+select{
+    height: 2rem;
+    border-radius: 1rem;
+    width: 6rem;
+    text-align: center;
+    font-size: 1rem;
+}
+
+figcaption{
+    font-size: 1rem;
+}
+
+label{
+    color: white;
+    font-size: 1.5rem;
+    margin-right: 10px;
+}
+
+#noArticulos{
+    font-size: 3rem;
+}
+
+header p{
+    font-size: 2rem;
 }

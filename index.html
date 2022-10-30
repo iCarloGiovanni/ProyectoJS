@@ -4,50 +4,115 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://use.fontawesome.com/releases/v5.0.1/css/all.css" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Francois+One&display=swap" rel="stylesheet">
+
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap" rel="stylesheet"> -->
+    
     <link rel="stylesheet" href="css/main.css">
     <title>Control de pedidos - @Carlo.Giovanni</title>
 </head>
-<body onload = "script();">
+<body>
+
+    <header>
+        <img src="img/icon.PNG" alt="icono_paloma">
+        <p> @Carlo.Giovanni - PRODUCTOS PERSONALIZADOS </p>
+        <i class="fa badge fa-lg" id="noArticulos" value=0>&#xf07a;</i>
+
+    </header>
+
     <main>
-        <h1 class="title-tienda">Tienda</h1>
+        <div class="section">
+            <h1 class="title-tienda">Tienda</h1>
 
-        <p> Para agregar un producto a tu compra añade el codigo que le corresponde</p>
+            <p> Edita las propiedades del producto y haz click sobre el para agregarlo al carrito</p>
+            <div class="caracteristicas">
+                <div>
+                    <label for="talla">TALLA: </label>
+                    <select id="talla">
+                        <option value="CH">Chico</option>
+                        <option value="M">Mediano</option>
+                        <option value="L">Grande</option>
+                        <option value="XL">Extra Grande</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="color">COLOR: </label>
+                    <select id="color">
+                        <option value="Negro">Negro</option>
+                        <option value="Blanco">Blanco</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Rojo">Rojo</option>
+                    </select>
+                </div>
+                
+                <div>
+                    <label for="diseno">DISENO: </label>
+                    <select id="diseno">
+                        <option value="Paloma">Paloma</option>
+                        <option value="Planeta">Planeta</option>
+                        <option value="Corazon">Corazon</option>
+                        <option value="Abeja">Abeja</option>
+                    </select>
+                </div>
+                
+            </div>
 
-        <div class="productos">
-            <figure class="prod">
-                <img src="img/playera.PNG" alt="Playeras">
-                <figcaption>Playeras - Codigo: 1</figcaption>
-            </figure>
+            <div class="productos">
+                <figure class="playera">
+                    <img class="prod" src="img/playera.PNG" alt="Playeras">
+                    <figcaption>Playeras disponibles: 0</figcaption>
+                </figure>
         
-            <figure class="prod">
-                <img src="img/sudadera.PNG" alt="Sudaderas">
-                <figcaption>Sudaderas - Codigo: 2</figcaption>
-            </figure>
+                <figure class="sudadera">
+                    <img class="prod" src="img/sudadera.PNG" alt="Sudaderas">
+                    <figcaption>Sudaderas disponibles: 0</figcaption>
+                </figure>
         
-            <figure class="prod">
-                <img src="img/sueter.PNG" alt="Suéteres">
-                <figcaption>Suéteres - Codigo: 3</figcaption>
-            </figure>
+                <figure class="sueter">
+                    <img class="prod" src="img/sueter.PNG" alt="Suéteres">
+                    <figcaption>Suéteres disponibles: 0</figcaption>
+                </figure>
         
-            <figure class="prod">
-                <img src="img/taza.PNG" alt="Tazas">
-                <figcaption>Tazas - Codigo: 4</figcaption>
-            </figure>
+                <figure class="taza">
+                    <img class="prod" src="img/taza.PNG" alt="Tazas">
+                    <figcaption>Tazas disponibles: 0</figcaption>
+                </figure>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <h1 class="title-carrito">Carrito</h1>
+            <div id="carritoContent">
+                <!-- <div class="bloqueProducto">
+                    <img class="imgProd" src="img/playera.PNG" alt="producto">
+                    <h2 class="nombreProd">Playera</h2>
+                    <h3 class="precioProd">$200.00</h3>
+                    <p class="detallesProd">Color: Blanco - Talla: CH - Diseno: Paloma</p>
+                    <button type="button" class="btn-quitar" id="btn1">X</button>
+                </div> -->
+            </div>
+            <div class="carritoTotal">
+                <h2>TOTAL</h2>
+                <h3 id="precioTotal">$00.00</h3>
+            </div>
         </div>
     </main>
 
-    <footer id="pie-de-pagina">
-        <h3>@Carlo.Giovanni 2022</h3>
-        <h3>Aviso de Privacidad</h3>
-        <div class="social">
-            <h3>Contáctanos</h3>
-            <i class="fa fa-twitter-square"></i>
-            <i class="fa fa-instagram"></i>
-            <i class="fa fa-facebook-official"></i>
-        </div>
+    <footer>
+        <h4>@Carlo.Giovanni 2022</h3>
+        <h4>Aviso de Privacidad</h3>
+        <h4>Contáctanos</h3>
     </footer>
 
-    <script src="JavaScript/main.js" defer></script>
+    <script src="JavaScript/dom.js" defer></script>
     <script src="JavaScript/producto.js" defer></script>
 </body>
 </html>
