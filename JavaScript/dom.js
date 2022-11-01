@@ -2,7 +2,6 @@
 
 let inventario = [8, 6, 4, 2];
 let contadorCarrito = document.getElementById("noArticulos");
-let numProd = 0;
 let idEliminar = 0;
 
 let carritoContent = document.getElementById("carritoContent");
@@ -10,6 +9,7 @@ let carrito = new Array();
 let id_prod = 0;
 
 let precioTotal = document.getElementById("precioTotal");
+let playerasDis = document.getElementsByTagName("figcaption");
 
 //recuperar inventario de la memoria local
 let InventarioRecuperado = localStorage.getItem('inventarioGuardado');
@@ -21,15 +21,13 @@ if(InventarioRecuperado){
 let carritoRecuperado = localStorage.getItem('carritoGuardado');
 if(carritoRecuperado){
     carrito = JSON.parse(carritoRecuperado);
-    showCarrito();
     calcularTotal();
+    showCarrito();
     actualizarBadge();
     removeFromCart();
 }
 
-//Mostrar el numero de piezas disponibles
-let playerasDis = document.getElementsByTagName("figcaption");
-
+//Mostrar el numero de disponibles
 for(let i=0; i<playerasDis.length; i++){
     playerasDis[i].innerText = "Disponibles: " + inventario[i];
 }
@@ -38,7 +36,6 @@ for(let i=0; i<playerasDis.length; i++){
 let imgProd = document.getElementsByClassName("prod");
 
 for(let i=0; i<imgProd.length; i++){
-
     imgProd[i].addEventListener("click", addToCart);
 }
 
@@ -54,8 +51,7 @@ function addToCart(){
                 inventario[i]--;
                 playerasDis[i].innerText = "Disponibles: " + inventario[i];
 
-                //Crear un card nuevo dentro del carrito
-
+                //Crear un card nuevo dentro del carrito con sus caracteristicas
                 let tallaSelec = document.getElementById("talla").value;
                 let colorSelec = document.getElementById("color").value;
                 let disenoSelec = document.getElementById("diseno").value;
@@ -94,19 +90,18 @@ function addToCart(){
 
                 let productoSeleccionado =new producto (imgCard, nombreCard, colorSelec, tallaSelec, disenoSelec, precioCard);
 
-                productoSeleccionado.set_id(id_prod);
-                id_prod++;
+                productoSeleccionado.set_id(carrito.length);
 
                 carrito.push(productoSeleccionado);
                 console.table(carrito);
 
-                showCarrito();
-
-                actualizarBadge();
-
                 calcularTotal();
 
+                showCarrito();
+
                 removeFromCart();
+
+                actualizarBadge();
 
                 guardarInventario();
                 
@@ -153,8 +148,7 @@ function addToCart(){
  }
 
  function actualizarBadge(){
-    numProd = carrito.length;
-    contadorCarrito.setAttribute("value", numProd);
+    contadorCarrito.setAttribute("value", carrito.length);
  }
 
  function removeFromCart(){
@@ -170,33 +164,35 @@ function addToCart(){
             let carritoActualizado = carrito.filter((p)=> p.id != deleteID);
             carrito = carritoActualizado;
 
-            let nuevosID =0;
-            carritoActualizado = carrito.map((p)=>{
-                p.id = nuevosID;
-                nuevosID++;
-            })
-            
-            calcularTotal();
+            for(j=0; j<carrito.length; j++)
+            {
+                carrito[j].id = j;
+            }
+
             showCarrito();
+
+            calcularTotal();
+            
             removeFromCart();
+
+            actualizarBadge();
+
             guardarInventario();
+
             console.table(carrito);
 
         } ); 
     }
 
-    if(numProd>0){
-        numProd = carrito.length;
-        contadorCarrito.setAttribute("value", numProd);
+    if(carrito.length>0){
+        contadorCarrito.setAttribute("value", carrito.length);
     }
  }
 
 // PARA RECUPERAR QUITADOS DEL CARRRITO AL INVENTARIO
-
-
-function regresarAlInventario(id){
+function regresarAlInventario(x){
     
-    let devuelto = carrito[id].tipo;
+    let devuelto = carrito[x].tipo;
 
     switch(devuelto){
 
