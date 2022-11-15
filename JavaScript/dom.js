@@ -1,8 +1,12 @@
-// localStorage.clear();
+localStorage.clear();
 
 let inventario = [8, 6, 4, 2];
 let contadorCarrito = document.getElementById("noArticulos");
 let idEliminar = 0;
+let array_productos = new Array();
+
+const url = './JavaScript/ListaDeProductos.json';
+obtenerProductos();
 
 let carritoContent = document.getElementById("carritoContent");
 let carrito = new Array();
@@ -55,38 +59,10 @@ function addToCart(){
                 let tallaSelec = document.getElementById("talla").value;
                 let colorSelec = document.getElementById("color").value;
                 let disenoSelec = document.getElementById("diseno").value;
-                
-                let imgCard = "";
-                let nombreCard = "";
-                let precioCard = "";
-                
-                switch(i){
 
-                    case 0 :
-                        imgCard = "playera.PNG";
-                        nombreCard = "Playera";
-                        precioCard = 200;
-                    break;
-
-                    case 1 :
-                        imgCard = "sudadera.PNG";
-                        nombreCard = "Sudadera";
-                        precioCard = 400;
-                    break;
-
-                    case 2 :
-                        imgCard = "sueter.PNG";
-                        nombreCard = "Sueter";
-                        precioCard = 300;
-                    break;
-
-                    case 3 :
-                        imgCard = "taza.PNG";
-                        nombreCard = "Taza";
-                        precioCard = 100;
-                        tallaSelec = "N/A"
-                    break;
-                }
+                let imgCard = array_productos[i].imagen;
+                let nombreCard = array_productos[i].tipo;
+                let precioCard = array_productos[i].precio;
 
                 let productoSeleccionado =new producto (imgCard, nombreCard, colorSelec, tallaSelec, disenoSelec, precioCard);
 
@@ -217,3 +193,18 @@ function regresarAlInventario(x){
         break;
         }
 }
+
+//FETCH 
+function obtenerProductos(){
+    fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+
+        array_productos = data.productos;
+    })
+}
+
+
+
+
+

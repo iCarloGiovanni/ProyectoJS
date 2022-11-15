@@ -1,0 +1,27 @@
+{
+    "productos": [
+        {
+        "imagen": "playera.PNG",
+        "tipo": "Playera",
+        "precio": 200
+        },
+
+        {
+            "imagen": "sudadera.PNG",
+            "tipo": "Sudadera",
+            "precio": 400
+        },
+
+        {
+        "imagen": "sueter.PNG",
+        "tipo": "Sueter",
+        "precio": 300
+        },
+
+        {
+        "imagen": "taza.PNG",
+        "tipo": "Taza",
+        "precio": 100
+        }
+    ]
+}
