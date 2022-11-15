@@ -1,4 +1,4 @@
-localStorage.clear();
+// localStorage.clear();
 
 let inventario = [8, 6, 4, 2];
 let contadorCarrito = document.getElementById("noArticulos");
